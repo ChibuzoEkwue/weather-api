@@ -1,0 +1,18 @@
+{
+  "name": "stage1",
+  "version": "1.0.0",
+  "description": "My first project to hngx",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --env-file=.env --watch app.js",
+    "start": "node app.js "
+  },
+  "author": "Chibuzo Ekwue",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "express": "^4.19.2"
+  }
+}
