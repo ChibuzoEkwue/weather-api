@@ -11,7 +11,7 @@ const port = process.env.PORT || 1000;
 
 app.get("/", async (req, res) => {
 	const { visitor_name } = req.query;
-	
+
 	console.log(req.ip);
 
 	try {
@@ -19,6 +19,8 @@ app.get("/", async (req, res) => {
 			`https://api.geoapify.com/v1/ipinfo?apiKey=${process.env.API_KEY}`
 		);
 		const { city, location, ip } = data;
+
+		console.log(data);
 
 		const { data: weatherInfo } = await axios(
 			`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.WEATHER_KEY}&units=metric`
