@@ -3,13 +3,17 @@ import express from "express";
 
 const app = express();
 
+app.use("trust proxy", true);
+
 const port = process.env.PORT || 1000;
 
 app.get("/", async (req, res) => {
 	const { visitor_name } = req.query;
+
+	const ip = req.ip;
 	try {
 		const { data } = await axios(
-			`https://api.geoapify.com/v1/ipinfo?apiKey=${process.env.API_KEY}`
+			`https://api.geoapify.com/v1/ipinfo?ip=${ip}&apiKey=${process.env.API_KEY}`
 		);
 		const { city, location, ip } = data;
 
@@ -19,6 +23,7 @@ app.get("/", async (req, res) => {
 
 		res.json({
 			client_ip: ip,
+
 			location: city.name,
 			greeting: `Hello, ${visitor_name || ""}! the temperature is ${
 				weatherInfo.main.temp
@@ -33,5 +38,3 @@ app.get("/", async (req, res) => {
 app.listen(port, () => {
 	console.log("App is running");
 });
-
-export default app
